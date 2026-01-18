@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自然言語処理・AI学習ガイド</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .question-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .question-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: background 0.3s ease;
+        }
+
+        .question-header:hover {
+            background: #f8f9fa;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.05em;
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .question-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .toggle-icon {
+            color: #667eea;
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .question-card.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #fff;
+        }
+
+        .question-card.active .answer {
+            max-height: 500px;
+            padding: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .answer-label {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .answer-text {
+            color: #495057;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        .study-note {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            border-radius: 6px;
+        }
+
+        .study-note-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .study-note-title::before {
+            content: "📝";
+            margin-right: 8px;
+        }
+
+        .study-note-content {
+            color: #495057;
+            line-height: 1.8;
+        }
+
+        .study-note-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .study-note-content li {
+            margin: 5px 0;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .category-title {
+                font-size: 1.4em;
+            }
+
+            .question-text {
+                font-size: 0.95em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            gap: 15px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 自然言語処理・AI学習ガイド</h1>
+            <p>NLP、LLM、マルチモーダルAI、HCIの重要概念を学ぼう</p>
+        </header>
+
+        <div class="content">
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">26</div>
+                    <div class="stat-label">質問数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">カテゴリー</div>
+                </div>
+            </div>
+
+            <!-- カテゴリー1: 自然言語処理（NLP）の基礎と歴史 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">📚</span>
+                    1. 自然言語処理（NLP）の基礎と歴史
+                </h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q1</span>
+                        <span class="question-text">チューリングテストとは何ですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">人間とコンピュータがテキスト対話を行い、第三者がどちらが人間かを判断できなければ、コンピュータを「知的」と定義するテスト</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>チューリングテスト (Turing Test)</strong><br>
+                                <span class="highlight">1950年にアラン・チューリングが提唱</span>した、コンピュータが「知的」かどうかを定義するテストです。人間とコンピュータがテキスト対話を行い、第三者の人間がどちらが人間かを判断できなければ、そのコンピュータは知的であるとみなされます。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q2</span>
+                        <span class="question-text">形態素解析と構文解析の間の主な違いは何ですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">形態素解析は単語を構成する単位を識別し、構文解析は文全体の文法的関係を識別する。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <ul>
+                                    <li><strong>形態素解析:</strong> 文章を<span class="highlight">単語(形態素)という最小単位</span>に分割し、品詞などを識別します</li>
+                                    <li><strong>構文解析:</strong> <span class="highlight">文全体の文法的な構造</span>や、単語間の関係(主語・述語など)を識別します</li>
+                                </ul>
+                                <strong>補足:</strong> Eliza (1966)は単純なパターンマッチングを利用して心理カウンセラーのように振る舞うプログラムで、単純な反応でも人間が「対話している」と錯覚しやすい例として知られます。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q3</span>
+                        <span class="question-text">1980年代のエキスパートシステムが自然言語処理において直面した主要な課題は何でしたか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">システムが適用可能なドメインが非常に限定されてしまうこと</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>エキスパートシステム (1980年代)</strong><br>
+                                大量のルールを組み合わせて問題を解決するシステムでしたが、<span class="highlight">適用可能なドメインが限定的</span>であることやルールの維持が困難になるなどの限界がありました。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q4</span>
+                        <span class="question-text">現在の自然言語処理技術においてディープラーニングが主流となった大きな理由として適切なものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">手動でルールを作成する必要がなく、大量のデータからパターンを学習できるため</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>ディープラーニングの主流化</strong><br>
+                                従来の手動によるルール作成(ルールベース)とは異なり、<span class="highlight">大量のデータから自動的にパターンを学習(エンドツーエンド)</span>できるようになったことが大きな要因です。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー2: テキストデータの表現とベクトル表現 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">🔢</span>
+                    2. テキストデータの表現とベクトル表現
+                </h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q5</span>
+                        <span class="question-text">Bag of Words（BoW）の特徴として正しいものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">文書を単語の集合として表現し、単語の出現回数をカウントする。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>Bag of Words (BoW)</strong><br>
+                                文書を単語の集合として扱い、<span class="highlight">単語の出現回数をカウント</span>してベクトル化する手法です。<span class="highlight">語順や文脈の情報は失われます</span>。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q6</span>
+                        <span class="question-text">TF-IDFの特徴として正しいものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">単語の出現頻度に基づき、文書集合全体でその単語の希少性を考慮して重み付けを行う。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>TF-IDF (Term Frequency - Inverse Document Frequency)</strong><br>
+                                単語の<span class="highlight">出現頻度(TF)</span>に、その単語の<span class="highlight">文書集合全体における希少性(IDF)</span>を掛け合わせて重み付けを行う手法です。そのテキストにおいて特徴的な単語の重みが高くなります。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q7</span>
+                        <span class="question-text">単語埋め込みの特徴としてもっとも適切なものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">単語間の意味的な類似性を捉え、単語を低次元の密なベクトルとして表現する</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>単語埋め込み (Word Embedding)</strong><br>
+                                単語間の意味的な類似性を捉え、単語を<span class="highlight">低次元の「密なベクトル」</span>として表現する手法です。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q8</span>
+                        <span class="question-text">Word2vecにはどの2つの主要なアプローチがありますか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">スキップグラムとCBOW</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>Word2vec</strong><br>
+                                単語埋め込みを作成する代表的な手法で、2つのアプローチがあります：
+                                <ul>
+                                    <li><strong>CBOW:</strong> <span class="highlight">周辺単語から中心単語を予測</span></li>
+                                    <li><strong>スキップグラム (Skip-gram):</strong> <span class="highlight">中心単語から周辺単語を予測</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q9</span>
+                        <span class="question-text">Transformerモデルの主要な特徴は何ですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">自己注意機構を使用して、入力シーケンス内のすべての単語間の関連度を計算する。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>Transformer</strong><br>
+                                <span class="highlight">2017年に発表</span>された現在の標準的なモデルで、<span class="highlight">自己注意機構 (Self-Attention)</span> を使用して入力シーケンス内の全単語間の関連度を一度に計算します。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー3: 大規模言語モデル（LLM）とRAG -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">🧠</span>
+                    3. 大規模言語モデル（LLM）とRAG
+                </h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q10</span>
+                        <span class="question-text">事前学習モデル（Pre-trained model）とは何ですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">大規模データセットで事前に学習され、さまざまなタスクに適用可能な汎用モデル。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>事前学習モデル (Pre-trained model)</strong><br>
+                                <span class="highlight">大規模データセットであらかじめ学習</span>されており、さまざまなタスクに適用可能な汎用的なモデルです。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q11</span>
+                        <span class="question-text">RLHF（Reinforcement Learning from Human Feedback）の意味とは何ですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">人間のフィードバックを基に学習を進める強化学習の一種。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>RLHF (Reinforcement Learning from Human Feedback)</strong><br>
+                                <span class="highlight">人間からのフィードバック(評価)</span>を基に強化学習を行い、モデルの応答の適切さや自然さを向上させる手法です。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q12</span>
+                        <span class="question-text">ハルシネーション（Hallucination）を最も適切に説明しているのはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">モデルが存在しない事実や情報を生成してしまうこと</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>ハルシネーション (Hallucination)</strong><br>
+                                LLMが<span class="highlight">存在しない事実や情報を、もっともらしく生成</span>してしまう現象のことです。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q13</span>
+                        <span class="question-text">プロンプトエンジニアリングにおける「Zero-shot learning」の特徴を最もよく説明しているのはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">事例を一つも示さずにタスクを解決する方法。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>プロンプトエンジニアリング</strong>
+                                <ul>
+                                    <li><strong>Zero-shot learning:</strong> <span class="highlight">事例を一つも示さず</span>にタスクを解決させる方法です</li>
+                                    <li><strong>Few-shot learning:</strong> <span class="highlight">少数の事例を提示</span>して学習させる方法です</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q14</span>
+                        <span class="question-text">ベクターストアの特徴について誤っているものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">ベクターストアは必ずトランザクション機能を持つ（※一般的にベクトル検索の高速化に特化しており、従来のDBのような厳密なトランザクション機能が必須とは限りません）</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>ベクターストア</strong><br>
+                                単語やテキスト、画像などを<span class="highlight">数値ベクトル(埋め込み表現)として保存</span>するデータベースです。通常のデータベースと異なり、<span class="highlight">必ずしもトランザクション機能を持つとは限りません</span>。検索には<span class="highlight">コサイン類似度</span>がよく用いられます。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q15</span>
+                        <span class="question-text">RAGの基本的な特徴として、どの説明がもっとも適切ですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">ベースの学習モデルは変更せず、新たな領域のデータをベクトル化した知識として参照して回答する</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>RAG (Retrieval-Augmented Generation / 検索拡張生成)</strong><br>
+                                <span class="highlight">ベースのモデルは変更せず</span>、外部知識(ベクターストアなど)を検索して得られた情報をコンテキストとしてLLMに与え、回答を生成する仕組みです。<span class="highlight">ハルシネーションを抑制</span>し、回答の根拠を明示できる利点があります。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー4: マルチモーダルAIと音声処理 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">🎨</span>
+                    4. マルチモーダルAIと音声処理
+                </h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q16</span>
+                        <span class="question-text">CLIPが画像とテキストを対応づける際の学習方法はどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">画像とテキストを同じベクトル空間に配置し、正しい組の類似度を高める</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>CLIP</strong><br>
+                                <span class="highlight">2021年にOpenAIが公開</span>した、画像とテキストを同一のベクトル空間に配置し、正しい組み合わせの類似度が高くなるように学習されたモデルです。<br><br>
+                                <strong>マルチモーダル AI:</strong> テキスト、画像、音声など、<span class="highlight">複数の異なる形式(モード)のデータを統合</span>して扱うAIです。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q17</span>
+                        <span class="question-text">スクリーン理解（Screen Understanding）の利点として最も適切なのはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">UIに専用APIがなくても、画面内容を解釈して操作支援ができる</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>スクリーン理解 (Screen Understanding)</strong><br>
+                                <span class="highlight">専用のAPIがなくても</span>、画面の画像内容をAIが直接解釈して操作支援やUI理解を行う技術です。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q18</span>
+                        <span class="question-text">FFT（高速フーリエ変換）が音声処理で重要な理由として正しいものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">音声信号を周波数成分に分解し、特徴を抽出しやすくするため</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>音声処理とFFT (高速フーリエ変換)</strong><br>
+                                <span class="highlight">音声信号を周波数成分に分解</span>し、声の質やトーンなどの特徴を抽出しやすくするために重要な技術です。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q19</span>
+                        <span class="question-text">マルチモーダルAIのリスクとして適切なのはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">画像や音声などの個人情報が外部に送信され、プライバシーリスクが高まる</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>マルチモーダルUIのリスク</strong><br>
+                                プライバシーの漏洩(画像や音声に含まれる個人情報)、誤認識による誤操作、バイアスや不公平性などが挙げられます。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q20</span>
+                        <span class="question-text">マルチモーダルUIの長所として適切なのはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">視覚・音声・ジェスチャなど複数の感覚を統合し、自然な操作が可能になる</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                マルチモーダルUIは<span class="highlight">視覚・音声・ジェスチャなど複数の感覚を統合</span>し、自然な操作が可能になります。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー5: 人間拡張・HCI・倫理 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">👥</span>
+                    5. 人間拡張・HCI・倫理
+                </h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q21</span>
+                        <span class="question-text">人間拡張技術の説明としてもっとも適切なものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">人間の肉体的能力、知的能力などさまざまな点を拡張しようとする技術</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>人間拡張 (Human Augmentation)</strong><br>
+                                テクノロジーを用いて、<span class="highlight">人間の肉体的、知的能力、感覚などの限界を広げよう</span>とする技術の総称です。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q22</span>
+                        <span class="question-text">アシモフのロボット工学3原則に含まれると考えられるものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">上記のすべて（危害を加えない、命令に従う、自己を守る）</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>アシモフのロボット工学3原則</strong>
+                                <ul>
+                                    <li>第1条: ロボットは人間に<span class="highlight">危害を加えてはならない</span></li>
+                                    <li>第2条: ロボットは人間の<span class="highlight">命令に従わなければならない</span></li>
+                                    <li>第3条: ロボットは<span class="highlight">自己を守らなければならない</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q23</span>
+                        <span class="question-text">ウェアラブルデバイスに関する説明で正しいものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">ウェアラブルデバイスはプライバシーの観点から普及しづらい場合がある。</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>ウェアラブルデバイス</strong><br>
+                                腕時計型(Smart watch)や眼鏡型(Smart glass)、耳装着型(Hearables)などがあり、常に身につけるため<span class="highlight">プライバシーの観点が普及の課題</span>になることがあります。<br><br>
+                                <strong>IoT(モノのインターネット)</strong><br>
+                                組み込みシステムがネットワーク機能を備え(Smart X)、相互に連携する概念です。<br><br>
+                                <strong>通信技術:</strong>
+                                <ul>
+                                    <li><strong>NFC:</strong> <span class="highlight">数センチの近距離無線通信</span>規格で、日本ではFelicaなどが普及</li>
+                                    <li><strong>BLE (Bluetooth Low Energy):</strong> バージョン4から追加された<span class="highlight">IoT向けの低消費電力通信</span>モード</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q24</span>
+                        <span class="question-text">HCI研究の最新動向に関する記述として最も適切なものはどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">HCI研究は、人間とコンピュータの相互作用を改善するために、AIとのインタラクションデザインも含め広範囲にわたっている</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>HCI(ヒューマン・コンピュータ・インタラクション)</strong><br>
+                                人間とコンピュータの相互作用を改善するための研究分野で、<span class="highlight">AIとのインタラクションデザインも含め広範囲</span>にわたっています。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q25</span>
+                        <span class="question-text">HCIの分野において、アクセシビリティが重視される理由は何ですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">すべてのユーザーが、能力や文脈に関わらず等しく技術を利用できるようにするため</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>アクセシビリティ</strong><br>
+                                <span class="highlight">能力や状況に関わらず、すべてのユーザーが等しく技術を利用できる</span>ようにすることを目指す重要な概念です。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-number">Q26</span>
+                        <span class="question-text">事前に倫理審査を必要とする可能性が最も高い実験はどれですか？</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <span class="answer-label">✓ 正解</span>
+                        <p class="answer-text">脳波を利用してユーザーの感情を評価する実験</p>
+                        <div class="study-note">
+                            <div class="study-note-title">重要ポイント</div>
+                            <div class="study-note-content">
+                                <strong>実験の倫理審査</strong><br>
+                                <span class="highlight">脳波など生体情報を用いたり、ユーザーの感情に影響を与えたりする実験</span>、個人情報を扱う実験などは、事前に倫理審査が必要になる可能性が非常に高いです。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 自然言語処理・AI学習ガイド | 学習を楽しんでください 📖</p>
+        </footer>
+    </div>
+
+    <script>
+        // アコーディオン機能
+        document.querySelectorAll('.question-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const card = header.parentElement;
+                const wasActive = card.classList.contains('active');
+                
+                // すべてのカードを閉じる（オプション: 複数開けたい場合はこの部分をコメントアウト）
+                // document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+                
+                // クリックされたカードをトグル
+                if (wasActive) {
+                    card.classList.remove('active');
+                } else {
+                    card.classList.add('active');
+                }
+            });
+        });
+
+        // ページ読み込み時のアニメーション
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.question-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 30);
+            });
+        });
+    </script>
+</body>
+</html>
