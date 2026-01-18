@@ -201,6 +201,33 @@
             font-weight: 600;
         }
 
+        .warning-box {
+            margin-top: 10px;
+            padding: 12px;
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            border-radius: 6px;
+        }
+
+        .warning-box-title {
+            font-weight: bold;
+            color: #e53e3e;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .warning-box-title::before {
+            content: "⚠️";
+            margin-right: 8px;
+        }
+
+        .warning-box-content {
+            color: #742a2a;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+
         footer {
             background: #2c3e50;
             color: white;
@@ -436,6 +463,12 @@
                                 <span class="highlight">1950年にアラン・チューリングが提唱</span>した、コンピュータが「知的」かどうかを定義するテストです。人間とコンピュータがテキスト対話を行い、第三者の人間がどちらが人間かを判断できなければ、そのコンピュータは知的であるとみなされます。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                コンピュータの計算速度や論理力を測るものではなく、<strong>第三者の人間が判断できるか</strong>が重要です。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -458,6 +491,12 @@
                                 <strong>補足:</strong> Eliza (1966)は単純なパターンマッチングを利用して心理カウンセラーのように振る舞うプログラムで、単純な反応でも人間が「対話している」と錯覚しやすい例として知られます。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                どちらも意味解析を直接扱う段階ではありません。<strong>形態素=単語単位、構文=文の関係</strong>を識別します。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -477,6 +516,12 @@
                                 大量のルールを組み合わせて問題を解決するシステムでしたが、<span class="highlight">適用可能なドメインが限定的</span>であることやルールの維持が困難になるなどの限界がありました。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                処理速度不足ではなく、<strong>汎用性のなさ(ドメインが限定的)</strong>が課題でした。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -494,6 +539,12 @@
                             <div class="study-note-content">
                                 <strong>ディープラーニングの主流化</strong><br>
                                 従来の手動によるルール作成(ルールベース)とは異なり、<span class="highlight">大量のデータから自動的にパターンを学習(エンドツーエンド)</span>できるようになったことが大きな要因です。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                プログラミング不要ではなく、<strong>「ルールの手動作成」が不要</strong>になりました。
                             </div>
                         </div>
                     </div>
@@ -523,6 +574,12 @@
                                 文書を単語の集合として扱い、<span class="highlight">単語の出現回数をカウント</span>してベクトル化する手法です。<span class="highlight">語順や文脈の情報は失われます</span>。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                <strong>語順や文脈は完全に無視</strong>されます。単語の出現回数のみをカウントします。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -542,6 +599,12 @@
                                 単語の<span class="highlight">出現頻度(TF)</span>に、その単語の<span class="highlight">文書集合全体における希少性(IDF)</span>を掛け合わせて重み付けを行う手法です。そのテキストにおいて特徴的な単語の重みが高くなります。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                全単語を均等に扱わず、<strong>重要な単語(希少性が高い)の重みを高く</strong>します。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -559,6 +622,12 @@
                             <div class="study-note-content">
                                 <strong>単語埋め込み (Word Embedding)</strong><br>
                                 単語間の意味的な類似性を捉え、単語を<span class="highlight">低次元の「密なベクトル」</span>として表現する手法です。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                疎なベクトル(BoWなど)とは異なり、<strong>意味の類似性を密なベクトルで表現</strong>します。
                             </div>
                         </div>
                     </div>
@@ -584,6 +653,12 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                LSTMやBERTは別の仕組み・モデルです。Word2vecは<strong>スキップグラムとCBOW</strong>の2つです。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -601,6 +676,12 @@
                             <div class="study-note-content">
                                 <strong>Transformer</strong><br>
                                 <span class="highlight">2017年に発表</span>された現在の標準的なモデルで、<span class="highlight">自己注意機構 (Self-Attention)</span> を使用して入力シーケンス内の全単語間の関連度を一度に計算します。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                RNNのように順番に処理せず、<strong>一気に全関連度を計算</strong>します。
                             </div>
                         </div>
                     </div>
@@ -630,6 +711,12 @@
                                 <span class="highlight">大規模データセットであらかじめ学習</span>されており、さまざまなタスクに適用可能な汎用的なモデルです。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                ゼロから作るものでも、特定プロジェクト専用でもなく、<strong>大規模データで学習済みの汎用モデル</strong>です。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -649,6 +736,12 @@
                                 <span class="highlight">人間からのフィードバック(評価)</span>を基に強化学習を行い、モデルの応答の適切さや自然さを向上させる手法です。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                自動学習ではなく、あえて<strong>「人間の評価」を介在</strong>させます。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -666,6 +759,12 @@
                             <div class="study-note-content">
                                 <strong>ハルシネーション (Hallucination)</strong><br>
                                 LLMが<span class="highlight">存在しない事実や情報を、もっともらしく生成</span>してしまう現象のことです。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                回答の関連性の低さや過学習とは別の<strong>「嘘」の現象</strong>です。
                             </div>
                         </div>
                     </div>
@@ -690,6 +789,12 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                複数の例(Few-shot)や再学習とは異なり、<strong>事例を一つも示さない</strong>方法です。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -709,6 +814,12 @@
                                 単語やテキスト、画像などを<span class="highlight">数値ベクトル(埋め込み表現)として保存</span>するデータベースです。通常のデータベースと異なり、<span class="highlight">必ずしもトランザクション機能を持つとは限りません</span>。検索には<span class="highlight">コサイン類似度</span>がよく用いられます。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                DBより広い概念だが、<strong>ACID特性(厳密な整合性)は必須ではありません</strong>。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -726,6 +837,12 @@
                             <div class="study-note-content">
                                 <strong>RAG (Retrieval-Augmented Generation / 検索拡張生成)</strong><br>
                                 <span class="highlight">ベースのモデルは変更せず</span>、外部知識(ベクターストアなど)を検索して得られた情報をコンテキストとしてLLMに与え、回答を生成する仕組みです。<span class="highlight">ハルシネーションを抑制</span>し、回答の根拠を明示できる利点があります。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                追加学習(ファインチューニング)とは根本的に異なり、<strong>モデルを変えず外部知識を参照</strong>します。
                             </div>
                         </div>
                     </div>
@@ -756,6 +873,12 @@
                                 <strong>マルチモーダル AI:</strong> テキスト、画像、音声など、<span class="highlight">複数の異なる形式(モード)のデータを統合</span>して扱うAIです。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                画像のみ・テキストのみの処理ではなく、<strong>「組」を学習</strong>します。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -773,6 +896,12 @@
                             <div class="study-note-content">
                                 <strong>スクリーン理解 (Screen Understanding)</strong><br>
                                 <span class="highlight">専用のAPIがなくても</span>、画面の画像内容をAIが直接解釈して操作支援やUI理解を行う技術です。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                文字の暗号化や画像圧縮のための技術ではなく、<strong>専用APIなしで画面内容を解釈</strong>します。
                             </div>
                         </div>
                     </div>
@@ -794,6 +923,12 @@
                                 <span class="highlight">音声信号を周波数成分に分解</span>し、声の質やトーンなどの特徴を抽出しやすくするために重要な技術です。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                音量調整やノイズ完全除去が直接の目的ではなく、<strong>信号を周波数成分に分解</strong>することが目的です。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -813,6 +948,12 @@
                                 プライバシーの漏洩(画像や音声に含まれる個人情報)、誤認識による誤操作、バイアスや不公平性などが挙げられます。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                精度が上がるからといって安全性が保証されるわけではなく、<strong>プライバシーリスクが高まる</strong>可能性があります。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -829,6 +970,12 @@
                             <div class="study-note-title">重要ポイント</div>
                             <div class="study-note-content">
                                 マルチモーダルUIは<span class="highlight">視覚・音声・ジェスチャなど複数の感覚を統合</span>し、自然な操作が可能になります。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                操作を単純にするために「入力を1つに絞る」の逆で、<strong>複数の感覚を統合</strong>します。
                             </div>
                         </div>
                     </div>
@@ -858,6 +1005,12 @@
                                 テクノロジーを用いて、<span class="highlight">人間の肉体的、知的能力、感覚などの限界を広げよう</span>とする技術の総称です。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                肉体のみ、あるいはAIの活用のみに限定されず、<strong>肉体・知能の両方を拡張</strong>します。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -879,6 +1032,12 @@
                                     <li>第2条: ロボットは人間の<span class="highlight">命令に従わなければならない</span></li>
                                     <li>第3条: ロボットは<span class="highlight">自己を守らなければならない</span></li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                この<strong>3つ全てが揃ってアシモフの原則</strong>となります。
                             </div>
                         </div>
                     </div>
@@ -907,6 +1066,12 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                医療限定ではなく、またメガネ型が最大市場とは限りません。<strong>プライバシーが普及の障壁</strong>になります。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -924,6 +1089,12 @@
                             <div class="study-note-content">
                                 <strong>HCI(ヒューマン・コンピュータ・インタラクション)</strong><br>
                                 人間とコンピュータの相互作用を改善するための研究分野で、<span class="highlight">AIとのインタラクションデザインも含め広範囲</span>にわたっています。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                ハードウェアや処理速度だけに焦点を当てているわけではなく、<strong>AIとのインタラクションを含む広範囲</strong>です。
                             </div>
                         </div>
                     </div>
@@ -945,6 +1116,12 @@
                                 <span class="highlight">能力や状況に関わらず、すべてのユーザーが等しく技術を利用できる</span>ようにすることを目指す重要な概念です。
                             </div>
                         </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                耐久性向上やコスト削減が主目的ではなく、<strong>能力・状況に関わらず等しく利用</strong>できることが目的です。
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -962,6 +1139,12 @@
                             <div class="study-note-content">
                                 <strong>実験の倫理審査</strong><br>
                                 <span class="highlight">脳波など生体情報を用いたり、ユーザーの感情に影響を与えたりする実験</span>、個人情報を扱う実験などは、事前に倫理審査が必要になる可能性が非常に高いです。
+                            </div>
+                        </div>
+                        <div class="warning-box">
+                            <div class="warning-box-title">間違えやすいポイント</div>
+                            <div class="warning-box-content">
+                                マウス速度測定などの「身体的・精神的に低侵襲なもの」より、<strong>脳波を用いた感情評価</strong>の方が優先度が高いです。
                             </div>
                         </div>
                     </div>
