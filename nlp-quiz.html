@@ -13,16 +13,14 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -31,7 +29,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             padding: 40px 30px;
             text-align: center;
@@ -49,8 +47,83 @@
             margin-bottom: 5px;
         }
 
+        .instructions {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-size: 0.95em;
+        }
+
         .content {
             padding: 30px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 120px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #f5576c;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
         }
 
         .category {
@@ -58,11 +131,11 @@
         }
 
         .category-title {
-            font-size: 1.8em;
-            color: #667eea;
+            font-size: 1.6em;
+            color: #f5576c;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #f5576c;
             display: flex;
             align-items: center;
         }
@@ -72,7 +145,7 @@
             font-size: 1.2em;
         }
 
-        .question-card {
+        .quiz-item {
             background: #f8f9fa;
             border-radius: 12px;
             margin-bottom: 15px;
@@ -81,25 +154,17 @@
             border: 2px solid transparent;
         }
 
-        .question-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        .quiz-item:hover {
+            border-color: #f5576c;
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.2);
         }
 
-        .question-header {
+        .quiz-question {
             padding: 20px;
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: white;
-            transition: background 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-        }
-
-        .question-header:hover {
-            background: #f8f9fa;
         }
 
         .question-text {
@@ -110,123 +175,43 @@
             padding-right: 20px;
         }
 
-        .question-number {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-
-        .toggle-icon {
-            color: #667eea;
-            font-size: 1.5em;
-            transition: transform 0.3s ease;
-        }
-
-        .question-card.active .toggle-icon {
-            transform: rotate(180deg);
-        }
-
-        .answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            background: #fff;
-        }
-
-        .question-card.active .answer {
-            max-height: 500px;
+        .quiz-answer {
             padding: 20px;
+            background: #fff;
             border-top: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quiz-answer.hidden {
+            display: none;
         }
 
         .answer-label {
-            display: inline-block;
             background: #28a745;
             color: white;
-            padding: 5px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9em;
             font-weight: bold;
-            margin-bottom: 10px;
+            white-space: nowrap;
         }
 
         .answer-text {
             color: #495057;
-            font-size: 1em;
-            line-height: 1.8;
+            font-size: 1.05em;
+            flex: 1;
         }
 
-        .study-note {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f0f7ff;
-            border-left: 4px solid #667eea;
-            border-radius: 6px;
+        .checkbox-wrapper {
+            min-width: 40px;
         }
 
-        .study-note-title {
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .study-note-title::before {
-            content: "📝";
-            margin-right: 8px;
-        }
-
-        .study-note-content {
-            color: #495057;
-            line-height: 1.8;
-        }
-
-        .study-note-content ul {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
-
-        .study-note-content li {
-            margin: 5px 0;
-        }
-
-        .highlight {
-            background: #fff3cd;
-            padding: 2px 4px;
-            border-radius: 3px;
-            font-weight: 600;
-        }
-
-        .warning-box {
-            margin-top: 10px;
-            padding: 12px;
-            background: #fff5f5;
-            border-left: 4px solid #e53e3e;
-            border-radius: 6px;
-        }
-
-        .warning-box-title {
-            font-weight: bold;
-            color: #e53e3e;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .warning-box-title::before {
-            content: "⚠️";
-            margin-right: 8px;
-        }
-
-        .warning-box-content {
-            color: #742a2a;
-            line-height: 1.7;
-            font-size: 0.95em;
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
         }
 
         footer {
@@ -247,8 +232,7 @@
             }
 
             header h1 {
-                font-size: 1.6em;
-                line-height: 1.3;
+                font-size: 1.8em;
             }
 
             header p {
@@ -260,11 +244,11 @@
             }
 
             .stats {
-                flex-direction: row;
                 gap: 10px;
             }
 
             .stat-card {
+                min-width: 100px;
                 padding: 15px 10px;
             }
 
@@ -272,925 +256,1564 @@
                 font-size: 2em;
             }
 
-            .stat-label {
-                font-size: 0.85em;
-            }
-
-            .category {
-                margin-bottom: 30px;
-            }
-
             .category-title {
                 font-size: 1.3em;
-                padding-bottom: 8px;
             }
 
-            .question-card {
-                margin-bottom: 12px;
-            }
-
-            .question-header {
+            .quiz-question {
                 padding: 15px;
-                flex-wrap: nowrap;
+            }
+
+            .question-text {
+                font-size: 0.95em;
+            }
+
+            .quiz-answer {
+                padding: 15px;
+                flex-direction: column;
                 align-items: flex-start;
             }
 
-            .question-number {
-                padding: 4px 10px;
-                font-size: 0.85em;
-                margin-right: 10px;
-                flex-shrink: 0;
-            }
-
-            .question-text {
-                font-size: 0.95em;
-                line-height: 1.5;
-                padding-right: 10px;
-            }
-
-            .toggle-icon {
-                font-size: 1.2em;
-                flex-shrink: 0;
-            }
-
-            .answer {
-                max-height: 0;
-            }
-
-            .question-card.active .answer {
-                max-height: 1000px;
-                padding: 15px;
-            }
-
-            .answer-label {
-                font-size: 0.85em;
-                padding: 4px 12px;
-            }
-
             .answer-text {
                 font-size: 0.95em;
-                line-height: 1.7;
             }
-
-            .study-note {
-                margin-top: 12px;
-                padding: 12px;
-                font-size: 0.9em;
-            }
-
-            .study-note-title {
-                font-size: 0.95em;
-                margin-bottom: 8px;
-            }
-
-            .study-note-content {
-                font-size: 0.9em;
-                line-height: 1.7;
-            }
-
-            .study-note-content ul {
-                padding-left: 18px;
-                margin: 8px 0;
-            }
-
-            .study-note-content li {
-                margin: 6px 0;
-            }
-
-            footer {
-                padding: 15px;
-                font-size: 0.85em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.4em;
-            }
-
-            header p {
-                font-size: 0.9em;
-            }
-
-            .stat-number {
-                font-size: 1.8em;
-            }
-
-            .category-title {
-                font-size: 1.15em;
-            }
-
-            .question-text {
-                font-size: 0.9em;
-            }
-
-            .answer-text {
-                font-size: 0.9em;
-            }
-
-            .study-note-content {
-                font-size: 0.85em;
-            }
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 30px 0;
-            gap: 15px;
-        }
-
-        .stat-card {
-            flex: 1;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .stat-label {
-            color: #6c757d;
-            margin-top: 5px;
-            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🤖 自然言語処理・AI学習ガイド</h1>
-            <p>NLP、LLM、マルチモーダルAI、HCIの重要概念を学ぼう</p>
+            <h1>📚 UXデザイン１ 期末テスト</h1>
+            <p>完全版暗記シート - 160項目以上のキーワード収録</p>
+            <div class="instructions">
+                <strong>使い方:</strong> 「答えを隠す/表示」ボタンで答えを切り替えて、説明文から用語を答えられるかテストしてください。<br>
+                講義資料（第1回〜第14回）および中間テストの内容を徹底的に網羅しています。
+            </div>
         </header>
 
         <div class="content">
             <div class="stats">
                 <div class="stat-card">
-                    <div class="stat-number">26</div>
-                    <div class="stat-label">質問数</div>
+                    <div class="stat-number">160+</div>
+                    <div class="stat-label">キーワード数</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">5</div>
+                    <div class="stat-number">10</div>
                     <div class="stat-label">カテゴリー</div>
                 </div>
-            </div>
-
-            <!-- カテゴリー1: 自然言語処理（NLP）の基礎と歴史 -->
-            <div class="category">
-                <h2 class="category-title">
-                    <span class="category-icon">📚</span>
-                    1. 自然言語処理（NLP）の基礎と歴史
-                </h2>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q1</span>
-                        <span class="question-text">チューリングテストとは何ですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">人間とコンピュータがテキスト対話を行い、第三者がどちらが人間かを判断できなければ、コンピュータを「知的」と定義するテスト</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>チューリングテスト (Turing Test)</strong><br>
-                                <span class="highlight">1950年にアラン・チューリングが提唱</span>した、コンピュータが「知的」かどうかを定義するテストです。人間とコンピュータがテキスト対話を行い、第三者の人間がどちらが人間かを判断できなければ、そのコンピュータは知的であるとみなされます。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                コンピュータの計算速度や論理力を測るものではなく、<strong>第三者の人間が判断できるか</strong>が重要です。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q2</span>
-                        <span class="question-text">形態素解析と構文解析の間の主な違いは何ですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">形態素解析は単語を構成する単位を識別し、構文解析は文全体の文法的関係を識別する。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <ul>
-                                    <li><strong>形態素解析:</strong> 文章を<span class="highlight">単語(形態素)という最小単位</span>に分割し、品詞などを識別します</li>
-                                    <li><strong>構文解析:</strong> <span class="highlight">文全体の文法的な構造</span>や、単語間の関係(主語・述語など)を識別します</li>
-                                </ul>
-                                <strong>補足:</strong> Eliza (1966)は単純なパターンマッチングを利用して心理カウンセラーのように振る舞うプログラムで、単純な反応でも人間が「対話している」と錯覚しやすい例として知られます。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                どちらも意味解析を直接扱う段階ではありません。<strong>形態素=単語単位、構文=文の関係</strong>を識別します。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q3</span>
-                        <span class="question-text">1980年代のエキスパートシステムが自然言語処理において直面した主要な課題は何でしたか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">システムが適用可能なドメインが非常に限定されてしまうこと</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>エキスパートシステム (1980年代)</strong><br>
-                                大量のルールを組み合わせて問題を解決するシステムでしたが、<span class="highlight">適用可能なドメインが限定的</span>であることやルールの維持が困難になるなどの限界がありました。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                処理速度不足ではなく、<strong>汎用性のなさ(ドメインが限定的)</strong>が課題でした。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q4</span>
-                        <span class="question-text">現在の自然言語処理技術においてディープラーニングが主流となった大きな理由として適切なものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">手動でルールを作成する必要がなく、大量のデータからパターンを学習できるため</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>ディープラーニングの主流化</strong><br>
-                                従来の手動によるルール作成(ルールベース)とは異なり、<span class="highlight">大量のデータから自動的にパターンを学習(エンドツーエンド)</span>できるようになったことが大きな要因です。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                プログラミング不要ではなく、<strong>「ルールの手動作成」が不要</strong>になりました。
-                            </div>
-                        </div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">講義回数</div>
                 </div>
             </div>
 
-            <!-- カテゴリー2: テキストデータの表現とベクトル表現 -->
-            <div class="category">
-                <h2 class="category-title">
-                    <span class="category-icon">🔢</span>
-                    2. テキストデータの表現とベクトル表現
-                </h2>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q5</span>
-                        <span class="question-text">Bag of Words（BoW）の特徴として正しいものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">文書を単語の集合として表現し、単語の出現回数をカウントする。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>Bag of Words (BoW)</strong><br>
-                                文書を単語の集合として扱い、<span class="highlight">単語の出現回数をカウント</span>してベクトル化する手法です。<span class="highlight">語順や文脈の情報は失われます</span>。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                <strong>語順や文脈は完全に無視</strong>されます。単語の出現回数のみをカウントします。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q6</span>
-                        <span class="question-text">TF-IDFの特徴として正しいものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">単語の出現頻度に基づき、文書集合全体でその単語の希少性を考慮して重み付けを行う。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>TF-IDF (Term Frequency - Inverse Document Frequency)</strong><br>
-                                単語の<span class="highlight">出現頻度(TF)</span>に、その単語の<span class="highlight">文書集合全体における希少性(IDF)</span>を掛け合わせて重み付けを行う手法です。そのテキストにおいて特徴的な単語の重みが高くなります。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                全単語を均等に扱わず、<strong>重要な単語(希少性が高い)の重みを高く</strong>します。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q7</span>
-                        <span class="question-text">単語埋め込みの特徴としてもっとも適切なものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">単語間の意味的な類似性を捉え、単語を低次元の密なベクトルとして表現する</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>単語埋め込み (Word Embedding)</strong><br>
-                                単語間の意味的な類似性を捉え、単語を<span class="highlight">低次元の「密なベクトル」</span>として表現する手法です。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                疎なベクトル(BoWなど)とは異なり、<strong>意味の類似性を密なベクトルで表現</strong>します。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q8</span>
-                        <span class="question-text">Word2vecにはどの2つの主要なアプローチがありますか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">スキップグラムとCBOW</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>Word2vec</strong><br>
-                                単語埋め込みを作成する代表的な手法で、2つのアプローチがあります：
-                                <ul>
-                                    <li><strong>CBOW:</strong> <span class="highlight">周辺単語から中心単語を予測</span></li>
-                                    <li><strong>スキップグラム (Skip-gram):</strong> <span class="highlight">中心単語から周辺単語を予測</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                LSTMやBERTは別の仕組み・モデルです。Word2vecは<strong>スキップグラムとCBOW</strong>の2つです。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q9</span>
-                        <span class="question-text">Transformerモデルの主要な特徴は何ですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">自己注意機構を使用して、入力シーケンス内のすべての単語間の関連度を計算する。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>Transformer</strong><br>
-                                <span class="highlight">2017年に発表</span>された現在の標準的なモデルで、<span class="highlight">自己注意機構 (Self-Attention)</span> を使用して入力シーケンス内の全単語間の関連度を一度に計算します。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                RNNのように順番に処理せず、<strong>一気に全関連度を計算</strong>します。
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="toggleAllAnswers()">答えを隠す/表示</button>
+                <button class="btn btn-secondary" onclick="hideAllAnswers()">すべて隠す</button>
+                <button class="btn btn-secondary" onclick="showAllAnswers()">すべて表示</button>
             </div>
 
-            <!-- カテゴリー3: 大規模言語モデル（LLM）とRAG -->
-            <div class="category">
-                <h2 class="category-title">
-                    <span class="category-icon">🧠</span>
-                    3. 大規模言語モデル（LLM）とRAG
-                </h2>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q10</span>
-                        <span class="question-text">事前学習モデル（Pre-trained model）とは何ですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">大規模データセットで事前に学習され、さまざまなタスクに適用可能な汎用モデル。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>事前学習モデル (Pre-trained model)</strong><br>
-                                <span class="highlight">大規模データセットであらかじめ学習</span>されており、さまざまなタスクに適用可能な汎用的なモデルです。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                ゼロから作るものでも、特定プロジェクト専用でもなく、<strong>大規模データで学習済みの汎用モデル</strong>です。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q11</span>
-                        <span class="question-text">RLHF（Reinforcement Learning from Human Feedback）の意味とは何ですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">人間のフィードバックを基に学習を進める強化学習の一種。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>RLHF (Reinforcement Learning from Human Feedback)</strong><br>
-                                <span class="highlight">人間からのフィードバック(評価)</span>を基に強化学習を行い、モデルの応答の適切さや自然さを向上させる手法です。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                自動学習ではなく、あえて<strong>「人間の評価」を介在</strong>させます。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q12</span>
-                        <span class="question-text">ハルシネーション（Hallucination）を最も適切に説明しているのはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">モデルが存在しない事実や情報を生成してしまうこと</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>ハルシネーション (Hallucination)</strong><br>
-                                LLMが<span class="highlight">存在しない事実や情報を、もっともらしく生成</span>してしまう現象のことです。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                回答の関連性の低さや過学習とは別の<strong>「嘘」の現象</strong>です。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q13</span>
-                        <span class="question-text">プロンプトエンジニアリングにおける「Zero-shot learning」の特徴を最もよく説明しているのはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">事例を一つも示さずにタスクを解決する方法。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>プロンプトエンジニアリング</strong>
-                                <ul>
-                                    <li><strong>Zero-shot learning:</strong> <span class="highlight">事例を一つも示さず</span>にタスクを解決させる方法です</li>
-                                    <li><strong>Few-shot learning:</strong> <span class="highlight">少数の事例を提示</span>して学習させる方法です</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                複数の例(Few-shot)や再学習とは異なり、<strong>事例を一つも示さない</strong>方法です。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q14</span>
-                        <span class="question-text">ベクターストアの特徴について誤っているものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">ベクターストアは必ずトランザクション機能を持つ（※一般的にベクトル検索の高速化に特化しており、従来のDBのような厳密なトランザクション機能が必須とは限りません）</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>ベクターストア</strong><br>
-                                単語やテキスト、画像などを<span class="highlight">数値ベクトル(埋め込み表現)として保存</span>するデータベースです。通常のデータベースと異なり、<span class="highlight">必ずしもトランザクション機能を持つとは限りません</span>。検索には<span class="highlight">コサイン類似度</span>がよく用いられます。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                DBより広い概念だが、<strong>ACID特性(厳密な整合性)は必須ではありません</strong>。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q15</span>
-                        <span class="question-text">RAGの基本的な特徴として、どの説明がもっとも適切ですか？</span>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">ベースの学習モデルは変更せず、新たな領域のデータをベクトル化した知識として参照して回答する</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>RAG (Retrieval-Augmented Generation / 検索拡張生成)</strong><br>
-                                <span class="highlight">ベースのモデルは変更せず</span>、外部知識(ベクターストアなど)を検索して得られた情報をコンテキストとしてLLMに与え、回答を生成する仕組みです。<span class="highlight">ハルシネーションを抑制</span>し、回答の根拠を明示できる利点があります。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                追加学習(ファインチューニング)とは根本的に異なり、<strong>モデルを変えず外部知識を参照</strong>します。
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- カテゴリー4: マルチモーダルAIと音声処理 -->
+            <!-- カテゴリー1: UI/UXの基礎概念・認知心理学 -->
             <div class="category">
                 <h2 class="category-title">
                     <span class="category-icon">🎨</span>
-                    4. マルチモーダルAIと音声処理
+                    1. UI/UXの基礎概念・認知心理学（第1・2回）
                 </h2>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q16</span>
-                        <span class="question-text">CLIPが画像とテキストを対応づける際の学習方法はどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーが製品・サービスを利用する過程（利用前・中・後）のすべての体験。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">画像とテキストを同じベクトル空間に配置し、正しい組の類似度を高める</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>CLIP</strong><br>
-                                <span class="highlight">2021年にOpenAIが公開</span>した、画像とテキストを同一のベクトル空間に配置し、正しい組み合わせの類似度が高くなるように学習されたモデルです。<br><br>
-                                <strong>マルチモーダル AI:</strong> テキスト、画像、音声など、<span class="highlight">複数の異なる形式(モード)のデータを統合</span>して扱うAIです。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                画像のみ・テキストのみの処理ではなく、<strong>「組」を学習</strong>します。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">UX (User Experience)</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q17</span>
-                        <span class="question-text">スクリーン理解（Screen Understanding）の利点として最も適切なのはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーとシステムの接点（画面デザイン、操作部など）。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">UIに専用APIがなくても、画面内容を解釈して操作支援ができる</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>スクリーン理解 (Screen Understanding)</strong><br>
-                                <span class="highlight">専用のAPIがなくても</span>、画面の画像内容をAIが直接解釈して操作支援やUI理解を行う技術です。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                文字の暗号化や画像圧縮のための技術ではなく、<strong>専用APIなしで画面内容を解釈</strong>します。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">UI (User Interface)</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q18</span>
-                        <span class="question-text">FFT（高速フーリエ変換）が音声処理で重要な理由として正しいものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ISO 9241-210で定義された、ユーザーのニーズや能力に合わせて設計するプロセス。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">音声信号を周波数成分に分解し、特徴を抽出しやすくするため</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>音声処理とFFT (高速フーリエ変換)</strong><br>
-                                <span class="highlight">音声信号を周波数成分に分解</span>し、声の質やトーンなどの特徴を抽出しやすくするために重要な技術です。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                音量調整やノイズ完全除去が直接の目的ではなく、<strong>信号を周波数成分に分解</strong>することが目的です。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">人間中心設計 (HCD)</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q19</span>
-                        <span class="question-text">マルチモーダルAIのリスクとして適切なのはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">事物が持つ「どのような行為が可能か」という性質（例：椅子は座れる）。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">画像や音声などの個人情報が外部に送信され、プライバシーリスクが高まる</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>マルチモーダルUIのリスク</strong><br>
-                                プライバシーの漏洩(画像や音声に含まれる個人情報)、誤認識による誤操作、バイアスや不公平性などが挙げられます。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                精度が上がるからといって安全性が保証されるわけではなく、<strong>プライバシーリスクが高まる</strong>可能性があります。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">アフォーダンス</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q20</span>
-                        <span class="question-text">マルチモーダルUIの長所として適切なのはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーに適切な行動を伝えるための、知覚可能な手がかり（マーク、音など）。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">視覚・音声・ジェスチャなど複数の感覚を統合し、自然な操作が可能になる</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                マルチモーダルUIは<span class="highlight">視覚・音声・ジェスチャなど複数の感覚を統合</span>し、自然な操作が可能になります。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                操作を単純にするために「入力を1つに絞る」の逆で、<strong>複数の感覚を統合</strong>します。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">シグニファイア</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">操作部と対象の動きや配置の対応関係（例：右のスイッチで右のライトがつく）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">対応づけ (Mapping)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">行為の結果をユーザーに伝えること（例：ボタンを押すと音が鳴る）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">フィードバック</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">システムがどう動くかについて、ユーザーの頭の中に形成されるイメージや理解。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">メンタルモデル</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">システムの仕組みそのものの構造や論理。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">概念モデル (Design model)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">意図（ゴール）は正しいが、実行段階でやり損なうエラー（押し間違いなど）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">スリップ</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">そもそも意図（ゴール）や計画自体が間違っているエラー（思い込みなど）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ミステーク</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">人間の短期記憶の容量限界とされる数（7±2）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">マジカルナンバー7</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">情報を意味のあるまとまりにして記憶しやすくする手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">チャンク化</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">「ユーザーを騙す」目的で設計された悪意あるUIデザイン。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ダークパターン</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ニールセンのユーザビリティ10原則の一つ。システムの状態を常に知らせるべきという原則。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">システム状態の視認性</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">過去の経験や慣習に基づいて、学習しなくても使えること。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">学習のしやすさ (Learnability)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーがエラーをした際に、容易に回復できること。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">エラー回復性</span>
                     </div>
                 </div>
             </div>
 
-            <!-- カテゴリー5: 人間拡張・HCI・倫理 -->
+            <!-- カテゴリー2: デザインプロセス・調査手法 -->
             <div class="category">
                 <h2 class="category-title">
-                    <span class="category-icon">👥</span>
-                    5. 人間拡張・HCI・倫理
+                    <span class="category-icon">🔍</span>
+                    2. デザインプロセス・調査手法（第2回）
                 </h2>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q21</span>
-                        <span class="question-text">人間拡張技術の説明としてもっとも適切なものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">HCDプロセスの4要素：①利用状況の把握、②(A)、③解決策の作成、④評価。(A)は？</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">人間の肉体的能力、知的能力などさまざまな点を拡張しようとする技術</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>人間拡張 (Human Augmentation)</strong><br>
-                                テクノロジーを用いて、<span class="highlight">人間の肉体的、知的能力、感覚などの限界を広げよう</span>とする技術の総称です。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                肉体のみ、あるいはAIの活用のみに限定されず、<strong>肉体・知能の両方を拡張</strong>します。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ユーザーの要求事項の明示</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q22</span>
-                        <span class="question-text">アシモフのロボット工学3原則に含まれると考えられるものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">調査対象のコミュニティに入り込み、行動を詳細に観察する定性調査手法。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">上記のすべて（危害を加えない、命令に従う、自己を守る）</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>アシモフのロボット工学3原則</strong>
-                                <ul>
-                                    <li>第1条: ロボットは人間に<span class="highlight">危害を加えてはならない</span></li>
-                                    <li>第2条: ロボットは人間の<span class="highlight">命令に従わなければならない</span></li>
-                                    <li>第3条: ロボットは<span class="highlight">自己を守らなければならない</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                この<strong>3つ全てが揃ってアシモフの原則</strong>となります。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">エスノグラフィー</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q23</span>
-                        <span class="question-text">ウェアラブルデバイスに関する説明で正しいものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">平均的なユーザーではなく、極端な行動をとるユーザー（ヒントを得やすい）。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">ウェアラブルデバイスはプライバシーの観点から普及しづらい場合がある。</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>ウェアラブルデバイス</strong><br>
-                                腕時計型(Smart watch)や眼鏡型(Smart glass)、耳装着型(Hearables)などがあり、常に身につけるため<span class="highlight">プライバシーの観点が普及の課題</span>になることがあります。<br><br>
-                                <strong>IoT(モノのインターネット)</strong><br>
-                                組み込みシステムがネットワーク機能を備え(Smart X)、相互に連携する概念です。<br><br>
-                                <strong>通信技術:</strong>
-                                <ul>
-                                    <li><strong>NFC:</strong> <span class="highlight">数センチの近距離無線通信</span>規格で、日本ではFelicaなどが普及</li>
-                                    <li><strong>BLE (Bluetooth Low Energy):</strong> バージョン4から追加された<span class="highlight">IoT向けの低消費電力通信</span>モード</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                医療限定ではなく、またメガネ型が最大市場とは限りません。<strong>プライバシーが普及の障壁</strong>になります。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">エクストリームユーザー</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q24</span>
-                        <span class="question-text">HCI研究の最新動向に関する記述として最も適切なものはどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">架空の典型的ユーザー像。名前、年齢、性格などを詳細に設定したもの。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">HCI研究は、人間とコンピュータの相互作用を改善するために、AIとのインタラクションデザインも含め広範囲にわたっている</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>HCI(ヒューマン・コンピュータ・インタラクション)</strong><br>
-                                人間とコンピュータの相互作用を改善するための研究分野で、<span class="highlight">AIとのインタラクションデザインも含め広範囲</span>にわたっています。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                ハードウェアや処理速度だけに焦点を当てているわけではなく、<strong>AIとのインタラクションを含む広範囲</strong>です。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ペルソナ</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q25</span>
-                        <span class="question-text">HCIの分野において、アクセシビリティが重視される理由は何ですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーの行動、思考、感情を時系列に沿って可視化したマップ。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">すべてのユーザーが、能力や文脈に関わらず等しく技術を利用できるようにするため</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>アクセシビリティ</strong><br>
-                                <span class="highlight">能力や状況に関わらず、すべてのユーザーが等しく技術を利用できる</span>ようにすることを目指す重要な概念です。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                耐久性向上やコスト削減が主目的ではなく、<strong>能力・状況に関わらず等しく利用</strong>できることが目的です。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">カスタマージャーニーマップ</span>
                     </div>
                 </div>
 
-                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-number">Q26</span>
-                        <span class="question-text">事前に倫理審査を必要とする可能性が最も高い実験はどれですか？</span>
-                        <span class="toggle-icon">▼</span>
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーの行動から「心の声」を推測し、背後にある「価値」を導き出す手法。</span>
                     </div>
-                    <div class="answer">
-                        <span class="answer-label">✓ 正解</span>
-                        <p class="answer-text">脳波を利用してユーザーの感情を評価する実験</p>
-                        <div class="study-note">
-                            <div class="study-note-title">重要ポイント</div>
-                            <div class="study-note-content">
-                                <strong>実験の倫理審査</strong><br>
-                                <span class="highlight">脳波など生体情報を用いたり、ユーザーの感情に影響を与えたりする実験</span>、個人情報を扱う実験などは、事前に倫理審査が必要になる可能性が非常に高いです。
-                            </div>
-                        </div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">間違えやすいポイント</div>
-                            <div class="warning-box-content">
-                                マウス速度測定などの「身体的・精神的に低侵襲なもの」より、<strong>脳波を用いた感情評価</strong>の方が優先度が高いです。
-                            </div>
-                        </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">KA法</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ブレインストーミングの4原則：①質より量、②粗い考え歓迎、③結合・改善、あと一つは？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">批判厳禁</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">アイデア発想のためのチェックリスト（転用、結合、変更、拡大、縮小など）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">オズボーンのチェックリスト</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">完成品ではなく、試作段階の模型を使って検証すること。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">プロトタイピング</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">紙に画面を描いて検証する、低コストなプロトタイプ手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ペーパープロトタイピング</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーに価値を提供できる「必要最小限の機能」を持った製品・サービス。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">MVP (Minimum Viable Product)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">2つの異なるデザイン（AとB）を比較し、どちらが優れているかを定量的に評価するテスト。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">A/Bテスト</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">被験者にタスクを実行してもらい、行動や発話を観察する評価手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ユーザビリティテスト</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">被験者が頭に浮かんだことを声に出しながら操作する手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">発話思考法 (Think Aloud)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">専門家が経験則（ヒューリスティックス）に基づいてUIを評価する手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ヒューリスティック評価</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー3: インタフェースの歴史 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">🖥️</span>
+                    3. インタフェースの歴史（第3回）
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">1945年にヴァネヴァー・ブッシュが構想した、情報検索システムの概念。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Memex (メメックス)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">1963年にサザランドが開発した、対話的図形処理システムの元祖。ライトペンを使用。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Sketchpad</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">1968年にエンゲルバートがデモを行ったシステム。マウス、マルチウィンドウ等を発表。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">NLS (oN-Line System)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">エンゲルバートが発明した、X-Y座標を入力するポインティングデバイス。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">マウス</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">1972年にアラン・ケイが提唱した、子供がプログラミングできる理想のPC構想。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Dynabook</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">アラン・ケイらがゼロックスPARCで開発した、GUIを備えた最初期のワークステーション。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Alto (アルト)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">コンピュータの操作対象を、現実世界の物（机、ゴミ箱、フォルダ）になぞらえる考え方。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">メタファ (Desktop Metaphor)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">画面上の対象をマウス等で直接的につかんだり操作したりする感覚のUI概念。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">直接操作 (Direct Manipulation)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">画面上の見た目と印刷結果が一致する性質のこと（What You See Is What You Get）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">WYSIWYG</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ウィンドウ、アイコン、メニュー、ポインティングデバイスを用いたUIの総称。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">WIMP / GUI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー4: 入力技術・日本語入力 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">⌨️</span>
+                    4. 入力技術・日本語入力（第4・5回）
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">現在最も普及している英字キーボード配列。タイプライターのジャム防止に由来。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">QWERTY配列</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">入力効率を最適化するために考案されたが、普及しなかったキーボード配列。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Dvorak配列</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">複数のキーを同時に押すことで文字を入力する方式（速記などで利用）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">コード入力 (Chord)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">1978年に東芝が初めて実用化した、日本語入力に不可欠な技術。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">かな漢字変換</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ガラケーで使われた、同じキーを何度も押して文字を切り替える入力方式。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">トグル入力 (マルチタップ)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">スマートフォンで主流の、キーをタッチして上下左右にスライドさせる入力方式。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">フリック入力</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">キーボードのキー配置において、物理的な突起などでホームポジションを示す工夫。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">タクタイル (触覚的な目印)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー5: Web技術の基礎 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">🌐</span>
+                    5. Web技術の基礎（第6回）
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Webページを記述するためのマークアップ言語。ページの「構造」を担う。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">HTML</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Webページの「見た目・レイアウト・装飾」を指定する言語。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">CSS</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Webページ上で動的な処理を行うためのプログラミング言語。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">インターネット上でWebページを転送するための通信プロトコル。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">HTTP / HTTPS</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Web上のリソース（ページや画像）の場所を示すアドレス。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">URL</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">インターネット上の住所にあたるIPアドレスを、人間が覚えやすい名前に変えたもの。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ドメイン名</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ドメイン名とIPアドレスを変換するシステム。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">DNS</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Webページが見つからない場合にサーバーが返すHTTPステータスコード。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">404 (Not Found)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">リクエストが成功したことを示すHTTPステータスコード。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">200 (OK)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">サーバー内部でエラーが発生したことを示すHTTPステータスコード。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">500 (Internal Server Error)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">コンテンツを高速に配信するために、世界中に分散配置されたサーバー網。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">CDN</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">画面サイズ（PC、スマホ）に応じてCSSを切り替え、レイアウトを調整する手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">レスポンシブWebデザイン</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">レスポンシブデザインを実現するためにCSSで使われる機能（画面幅で条件分岐）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">メディアクエリ</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">障害の有無や年齢にかかわらず、誰もがWebを利用できるようにすること。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Webアクセシビリティ</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">画像が表示できない環境のために設定すべきHTML属性（代替テキスト）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">alt属性</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー6: プログラミング・非同期通信 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">💻</span>
+                    6. プログラミング・非同期通信（第7・8回）
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">HTMLの要素をプログラムから操作するための仕組み（木構造モデル）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">DOM (Document Object Model)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーの操作（クリックなど）をきっかけに処理を実行するプログラミング方式。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">イベント駆動 (Event Driven)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ボタンがクリックされた時に実行される関数のこと。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">イベントリスナー / ハンドラ</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">JavaScriptで「再代入可能な」変数を宣言するキーワード（ES6以降）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">let</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">JavaScriptで「再代入不可能な」変数を宣言するキーワード（ES6以降）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">const</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">関数を短く記述するための記法（ES6以降）。 (x) => x * 2</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">アロー関数</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ページ全体を再読み込みせず、サーバーと非同期通信して一部だけ更新する技術。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Ajax</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Ajaxなどでデータ交換によく使われる、軽量なテキストデータ形式。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">JSON</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">キーと値のペアで記述されるJSONの、キーを囲む記号は？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ダブルクォーテーション ( " )</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">JavaScriptで非同期通信を行うための現代的なAPI（XMLHttpRequestの後継）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Fetch API</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">非同期処理の完了または失敗を表すJavaScriptのオブジェクト。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Promise</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">1つのWebページ内でアプリのような挙動を実現する構成（遷移時にリロードしない）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">SPA (Single Page Application)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">複数のWebサービスやAPIを組み合わせて、新しいサービスを作ること。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">マッシュアップ</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Pythonの標準的なGUIツールキット。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Tkinter</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">GUIプログラムで、イベントの発生を待ち続ける無限ループ処理。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">メインループ (mainloop)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー7: 情報可視化・アニメーション -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">📊</span>
+                    7. 情報可視化・アニメーション（第9・10回）
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">抽象的なデータを視覚的に表現し、人間の認知を支援すること。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">情報可視化</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">情報をわかりやすく図解した、視覚的魅力重視の表現（可視化との対比）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">インフォグラフィクス</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ナポレオンのロシア遠征の損失を視覚化した有名な図の作者。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Minard (ミナール)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">シュナイダーマンの可視化のマントラ。「まずは(A)、次にズーム＆フィルタ、詳細はオンデマンド」。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">全体 (Overview first)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">人間が図形をグループとして知覚する法則（近接、類同、閉合など）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ゲシュタルト法則</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">不要な装飾やインクの無駄遣いを指す、エドワード・タフテの用語。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">チャートジャンク</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">階層構造（木構造）を、入れ子の長方形の面積で表現する可視化手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Treemap</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">単語の出現頻度などを文字の大きさで表現する可視化手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">タグクラウド (Word Cloud)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">詳細を見せつつ、全体の文脈も同時に表示する手法（魚眼レンズなど）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Focus + Context</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">画像を「点の集合」で表現する形式。拡大すると画質が荒くなる。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ビットマップ (ラスター)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">画像を「数式や座標」で表現する形式。拡大しても劣化しない。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ベクター</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">アニメーションの動き出しや停止時に速度を変化させ、自然な動きにする技法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">イージング (Slow In, Slow Out)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">1秒間に表示されるフレーム数。アニメーションの滑らかさの指標。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">fps (frames per second)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ボタンのON/OFFなど、微細だが操作感を向上させる小さなアニメーションや反応。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">マイクロインタラクション</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー8: 情報検索・レコメンデーション -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">🔎</span>
+                    8. 情報検索・レコメンデーション（第11回）
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">検索結果の中に含まれる「正解（適合文書）」の割合（精度）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">適合率 (Precision)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">世の中にある全ての正解のうち、検索でヒットした割合（網羅率）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">再現率 (Recall)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">適合率と再現率の調和平均をとった指標。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">F値</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">文書内の単語の重要度を「頻度」と「希少性（逆文書頻度）」で評価する手法。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">tf-idf法</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Web上のリンク構造（被リンク数）に基づいてページの重要度を測るGoogleの初期アルゴリズム。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">PageRank</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">Web上の文書を自動で巡回して収集するプログラム。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">クローラ (ロボット)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">「この商品に似た商品はこれ」と、アイテムの特徴に基づいて推薦する方式。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">コンテンツベースフィルタリング</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">「この商品を買った人はこれも買っています」と、他者の行動履歴を利用する推薦方式。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">協調フィルタリング</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">自分に都合の良い情報ばかりが表示され、視野が狭くなる現象。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">フィルターバブル</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">偶然に素敵なものや有益な情報を発見する現象・能力。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">セレンディピティ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー9: VR/AR・CSCW・IoT -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">🥽</span>
+                    9. VR/AR・CSCW・IoT（第12〜14回）
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">コンピュータで作られた仮想空間に没入する技術。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">VR (Virtual Reality)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">現実空間にデジタル情報を重ね合わせて表示する技術。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">AR (Augmented Reality)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">現実世界と仮想世界を融合させる技術全般（VR/ARを含む概念）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">MR (Mixed Reality) / xR</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">VR体験などで得られる「実在感」や「没入感」のこと。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">イマージョン / プレゼンス</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">視覚と平衡感覚のズレなどが原因で起こる、乗り物酔いに似た症状。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">VR酔い (Cyber sickness)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">レーザー光を使って対象までの距離や形状を測定するセンサー技術。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">LiDAR</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">振動や力によって、皮膚感覚（触覚）をフィードバックする技術。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ハプティクス</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">インターネット上の仮想空間において、自分の分身となるキャラクター。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">アバター</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">コンピュータを用いた協調作業を研究する分野。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">CSCW</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">複数人が協調作業を行うためのソフトウェア（Slack, Teamsなど）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">グループウェア</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">時間も場所も異なる場合のコミュニケーション（メール、Wikiなど）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">非同期・分散</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ビデオ会議のように、同じ時間を共有するコミュニケーション。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">同期型</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">遠隔地にいながら、あたかもその場にいるかのような感覚を与える技術。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">テレプレゼンス</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">組織の生産性向上に重要とされる、休憩時の雑談などのコミュニケーション。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">インフォーマルコミュニケーション</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">あらゆる「モノ」がインターネットにつながる仕組み。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">IoT (Internet of Things)</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">コンピュータが環境に溶け込み、いつでもどこでも利用できる概念（M.ワイザー提唱）。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">ユビキタスコンピューティング</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ユーザーの注意を過度に引かず、生活に溶け込む情報の提示のあり方。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">カーム・テクノロジー</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">デジタル情報を、実体のある物（物理的アイコンなど）を使って操作するUI。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">タンジブルUI</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">センサーやモーターなどの電子部品とソフトウェアを組み合わせた創作活動。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">フィジカルコンピューティング</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">クラウドではなく、端末（デバイス）の近くでデータ処理を行う方式。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">エッジコンピューティング</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">ロボット工学三原則を提唱したSF作家。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">アイザック・アシモフ</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">テクノロジーを使って人間の身体能力や知覚能力を強化・拡張すること。</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">人間拡張 (Human Augmentation)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カテゴリー10: コード読解・応用問題対策 -->
+            <div class="category">
+                <h2 class="category-title">
+                    <span class="category-icon">⚙️</span>
+                    10. コード読解・応用問題対策
+                </h2>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">setInterval(func, 1000) の動作は？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">1秒（1000ms）ごとに func を繰り返し実行する。</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">setTimeout(func, 1000) の動作は？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">1秒後に1回だけ func を実行する。</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">localStorage と sessionStorage の違いは？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">localは永続保存、sessionはブラウザ(タブ)を閉じると消える。</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">document.getElementById("hoge") の役割は？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">IDが "hoge" のHTML要素を取得する。</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">document.querySelector(".box") の役割は？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">クラス名 "box" を持つ最初の要素を取得する。</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">サーバー側での処理（PageRank計算など）に適している言語の例は？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">Python</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">10進数の「10」は、16進数では何？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">A</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">10進数の「15」は、16進数では何？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">F</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">色の三属性：色相、明度、あと一つは？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">彩度</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">デジタルツインとは？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">現実世界の環境をデジタル空間に双子のように再現し、シミュレーションする技術。</span>
+                    </div>
+                </div>
+
+                <div class="quiz-item">
+                    <div class="quiz-question">
+                        <span class="question-text">協調フィルタリングで、AさんとBさんの好みが「似ている」と判断する計算原理は？</span>
+                    </div>
+                    <div class="quiz-answer">
+                        <span class="answer-label">答え</span>
+                        <span class="answer-text">購入履歴などをベクトルと見なし、類似度（相関係数やコサイン類似度）を計算する。</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>&copy; 2026 自然言語処理・AI学習ガイド | 学習を楽しんでください 📖</p>
+            <p>&copy; 2026 UXデザイン１ 期末テスト対策 | 頑張ってください！ 📚</p>
         </footer>
     </div>
 
     <script>
-        // アコーディオン機能
-        document.querySelectorAll('.question-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const card = header.parentElement;
-                const wasActive = card.classList.contains('active');
-                
-                // すべてのカードを閉じる（オプション: 複数開けたい場合はこの部分をコメントアウト）
-                // document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
-                
-                // クリックされたカードをトグル
-                if (wasActive) {
-                    card.classList.remove('active');
+        let answersVisible = true;
+
+        function toggleAllAnswers() {
+            answersVisible = !answersVisible;
+            const answers = document.querySelectorAll('.quiz-answer');
+            answers.forEach(answer => {
+                if (answersVisible) {
+                    answer.classList.remove('hidden');
                 } else {
-                    card.classList.add('active');
+                    answer.classList.add('hidden');
                 }
+            });
+        }
+
+        function hideAllAnswers() {
+            answersVisible = false;
+            const answers = document.querySelectorAll('.quiz-answer');
+            answers.forEach(answer => {
+                answer.classList.add('hidden');
+            });
+        }
+
+        function showAllAnswers() {
+            answersVisible = true;
+            const answers = document.querySelectorAll('.quiz-answer');
+            answers.forEach(answer => {
+                answer.classList.remove('hidden');
+            });
+        }
+
+        // 個別クリックで答えを表示/非表示
+        document.querySelectorAll('.quiz-item').forEach(item => {
+            const question = item.querySelector('.quiz-question');
+            const answer = item.querySelector('.quiz-answer');
+            
+            question.addEventListener('click', () => {
+                answer.classList.toggle('hidden');
             });
         });
 
         // ページ読み込み時のアニメーション
         window.addEventListener('load', () => {
-            const cards = document.querySelectorAll('.question-card');
-            cards.forEach((card, index) => {
+            const items = document.querySelectorAll('.quiz-item');
+            items.forEach((item, index) => {
                 setTimeout(() => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                     
                     setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
                     }, 50);
-                }, index * 30);
+                }, index * 15);
             });
         });
     </script>
